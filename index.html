@@ -14,6 +14,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-36HKLK8');</script>
 <!-- End Google Tag Manager -->
+
+<style type="text/css">
+	body {
+  background: linear-gradient(to right, #c9ffbf, #ffafbd);
+}
+  .container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+</style>
 </head>
 <body>
   
@@ -35,6 +49,95 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
- 
+
+	
+
+
+<div class="container mt-3" style="max-width: 860px;">
+  <div class="alert alert-danger mt-3" style="display: none;">
+    <ul id="alerts">
+    </ul>
+  </div>
+  <div>
+    <h1 class="mb-3">Sign Up</h1>
+    <form id="signup-form">
+      <label class="form-label" for='username'>Username: </label>
+      <input class="form-control" name='username' type='text' id='username'>
+
+      <label class="form-label" for='password'>Password:</label>
+      <input class="form-control" name='password' type='password' id='password'>
+
+      <label class="form-label" for='confirm-pw'>Confirm Password:</label>
+      <input class="form-control mb-3" name='confirm-pw' type='password' id='confirm-pw'>
+
+      <input class="form-check-input" name='terms' type='checkbox' id='terms'>
+      <label class="form-check-label" for='terms'>Agree To Terms & Conditions</label>
+
+      <br>
+
+      <button class="signup-btn btn btn-outline-primary mt-3">Sign Up</button>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+	
+	// if you need to add email validation you can install npm install email-validator it's just more convenient
+
+const UIform = document.getElementById("signup-form")
+const UIusername = document.getElementById("username")
+const UIpassword = document.getElementById("password")
+const UIpasswordConfirmation = document.getElementById("confirm-pw")
+const UIterm = document.getElementById("terms")
+const UIbutton = document.querySelector(".signup-btn")
+const alerts = document.getElementById("alerts")
+
+UIform.addEventListener("submit", (e) => {
+    e.preventDefault()
+    let userinfo = []
+    if (
+        UIterm.checked &&
+        UIusername.value.length >= 5 &&
+        UIpassword.value.length >= 8 &&
+        UIpassword.value === UIpasswordConfirmation.value
+    ) { // if all good: 
+        
+        alerts.innerHTML = ''
+        document.querySelector('.alert').style.display = 'none'
+        const username = UIusername.value
+        const password = UIpassword.value
+        userinfo.push({ username: username, password: password })
+        alert("success!")
+        
+    } // if there are errors: 
+    else {
+        let errors = [];
+        alerts.innerHTML = ''
+        if(UIusername.value.length < 5){
+            errors.push('<li>username must be 5 characters or more</li>')
+        }if(UIpassword.value.length < 8 || UIpassword.value === ''){
+            errors.push('<li>password must be 8 characters or more</li>')
+        }if(UIpassword.value !== UIpasswordConfirmation.value){
+            errors.push('<li>passwords doesn\'t match</li>')            
+        }
+        if(!UIterm.checked){
+            errors.push('<li>Agree to terms to continue</li>')
+        }
+        errors.forEach((error) => {
+            alerts.innerHTML += error
+        })
+        document.querySelector('.alert').style.display = 'block'
+    }
+})
+
+/*
+    // * select form elements
+    // * add eventlistner on form sumbition
+    // * 3awez a3mel validation lel info abl ma a7otha fel array
+    // * ykon al username aktar mn 6 characters wel password aktar mn 8 characters wa ykon 3amel agree to terms.
+    // * 3awez agma3 al user input values wa a7thom fe array gowah object bel info
+    // * lw al user didn't meet the requirements announce a message of the specifc input that didn't meet the req.
+*/
+</script>
 </body>
 </html>
